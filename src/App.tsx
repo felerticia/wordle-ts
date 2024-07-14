@@ -23,14 +23,8 @@ function App() {
         return;
       }
 
-      if (currentWord.length < 5 && key === "enter") {
-        return;
-      }
-
-      if (currentWord.length === 5) {
-        if (key !== "enter") {
-          return;
-        } else {
+      if (key === "enter") {
+        if (currentWord.length === 5) {
           setGuesses((guesses) =>
             guesses.map((guess, idx) =>
               idx === currentRow ? currentWord : guess
@@ -38,11 +32,16 @@ function App() {
           );
           setCurrentRow((currentRow) => currentRow + 1);
           setCurrentWord("");
-          return;
         }
+        return;
       }
 
-      if (key >= "a" && key <= "z") {
+      if (
+        key >= "a" &&
+        key <= "z" &&
+        key.length === 1 &&
+        currentWord.length < 5
+      ) {
         setCurrentWord((currentWord) => currentWord + key.toUpperCase());
         return;
       }
@@ -56,13 +55,25 @@ function App() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
+  // useEffect(() => {
+  //   if (guesses[currentRow - 1] === solution && solution) {
+  //     console.log("You won");
+  //   } else if (currentRow > ROWS - 1) {
+  //     console.log("You lost");
+  //   }
+  // }, [guesses, currentRow, solution]);
+
   useEffect(() => {
     selectWord();
   }, []);
 
   return (
     <div className="App">
-      <Board guesses={guesses} />
+      <Board
+        guesses={guesses}
+        currentRow={currentRow}
+        currentWord={currentWord}
+      />
       <Keyboard />
     </div>
   );
