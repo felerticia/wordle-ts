@@ -1,4 +1,4 @@
-export const words = [
+export const WORDS = [
   "ALBUM",
   "HINGE",
   "MONEY",
@@ -340,3 +340,5 @@ export const words = [
   "REBUT",
   "CIGAR",
 ];
+
+export const ROWS = 6;

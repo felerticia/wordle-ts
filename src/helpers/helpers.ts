@@ -1,5 +1,5 @@
-import { words } from "../constants/contants";
+import { WORDS } from "../constants/contants";
 
 export const pickRandomWord = () => {
-  return words[Math.floor(Math.random() * words.length)];
+  return WORDS[Math.floor(Math.random() * WORDS.length)];
 };
