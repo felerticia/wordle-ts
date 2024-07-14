@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import { pickRandomWord } from "./helpers/helpers";
+import { merge, pickRandomWord } from "./helpers/helpers";
 import { ROWS } from "./constants/contants";
 import Board from "./components/Board/Board";
 import Keyboard from "./components/Keyboard/Keyboard";
@@ -10,6 +10,7 @@ function App() {
   const [guesses, setGuesses] = useState<string[]>(new Array(ROWS).fill(""));
   const [currentWord, setCurrentWord] = useState("");
   const [currentRow, setCurrentRow] = useState(0);
+  const [letters, setLetters] = useState("");
 
   const selectWord = () => setSolution(pickRandomWord);
 
@@ -32,6 +33,7 @@ function App() {
           );
           setCurrentRow((currentRow) => currentRow + 1);
           setCurrentWord("");
+          setLetters((letters) => merge(letters, currentWord));
         }
         return;
       }
@@ -75,7 +77,7 @@ function App() {
         currentWord={currentWord}
         solution={solution}
       />
-      <Keyboard />
+      <Keyboard letters={letters} solution={solution} guesses={guesses} />
     </div>
   );
 }
