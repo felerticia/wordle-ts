@@ -342,3 +342,9 @@ export const WORDS = [
 ];
 
 export const ROWS = 6;
+
+export enum GameStatus {
+  Ongoing = "Ongoing",
+  Won = "Won",
+  Lost = "Lost",
+}
