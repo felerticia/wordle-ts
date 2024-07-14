@@ -73,6 +73,7 @@ function App() {
         guesses={guesses}
         currentRow={currentRow}
         currentWord={currentWord}
+        solution={solution}
       />
       <Keyboard />
     </div>
